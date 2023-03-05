@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>{{ message }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="">
+    <h5>Crear Pregunta</h5>
+    <form action="/prueba" method="POST">
+        <label for="pregunta">Pregunta</label>
+        <textarea class="form-control" name="pregunta" id="pregunta" rows="1"></textarea>
+        <label for="tipresp">Seleccione el tipo de respuesta</label>
+        <select name="tipresp" id="tipresp">
+            <option value="SELECCION_SIMPLE">SELECCION UNICA</option>
+            <option value="SELECCION_MULTIPLE">SELECCION MULTIPLE</option>
+            <option value="TEXTO_CORTO">TEXTO CORTO</option>
+            <option value="PARRAFO">PARRAFO</option>
+            <option value="CUADRICULA_VARIAS_OPC">CUADRICULA</option>
+            <option value="DESPLEGABLE">DESPLEGABLE</option>
+            <option value="ESCALA_LINEAL">ESCALA LINEAL</option>
+            <option value="FECHA">FECHA</option>
+            <option value="HORA">HORA</option>
+        </select>
+        <div id="respuesta"></div>
+        <button id="addrespuesta" type="button">agregar respuestas</button>
+        <div class="form-group">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+<div>
+    <a href="/optionForm" class="" id="">Volver a respuestas del formulario</a>
+    {% if preguntas != 0%}
+    <a href="/createOptions" class="" id="">Agregar Respuestas</a>
+    {% endif %}
+</div>
+
+<script>
+    $(document).ready(function () {
+        var count_item = 0;
+        $("#addrespuesta").on("click", function () {
+            count_item += 1;
+            $("<input/>").attr({
+                type: "text", placeholder: "Enter respuesta",
+                name: "respuesta_" + count_item
+            }).appendTo("#respuesta").wrap($("<div/>"))
+        });
+    })
+</script>
+
+{% endblock %}

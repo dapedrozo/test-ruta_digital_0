@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>{{ message }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="">
+    <div class="">
+        <a href="/optionForm" class="btn btn-md btn-success">respuestas del formulario</a>
+    </div>
+</div>
+
+<div class="">
+        <!---GRAFICA
+        <div style="width:100%">
+            <canvas id="canvas"></canvas>
+        </div>
+        <input type="hidden" id="ejex" name="ejex" value="{{ejex}}">
+        <input type="hidden" id="ejey" name="ejey" value="{{ejey}}">
+       -->
+</div>
+
+<div>
+    <table>
+        <tbody>
+            {% for pregunta in preguntas %}
+            {% for respuesta in respuestas %}
+            {% for valor in valores %}
+            {% if pregunta.0 == respuesta.1 and respuesta.0 == valor.1%}
+            <tr>
+                <td>{{ pregunta.1 }}</td>
+                <td>{{ respuesta.2 }}</td>
+                <td>{{ valor.2 }}</td>
+                <td>{{ valor.3 }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
+            </tr>
+
+</div>
+</tbody>
+</table>
+<div class="">
+    <a href="/createQuestion" class="btn btn-md btn-success">Crear pregunta</a>
+</div>
+<div class="">
+    <a href="/createOptions" class="btn btn-md btn-success">Crear respuesta</a>
+</div>
+<div class="">
+    <a href="/createValues" class="btn btn-md btn-success">Crear caracteristicas y valores</a>
+</div>
+</tr>
+</div>
+<div class="">
+    <h5>Formulario prueba</h5>
+    <form action="#" method="POST">
+            {% for pregunta in preguntas %}
+            {% for respuesta in respuestas %}
+            {% for valor in valores %}
+            {% if pregunta.0 == respuesta.1 and respuesta.0 == valor.1%}
+
+                <form action="/#" method="POST">
+                    <label for="pregunta">{{ pregunta.1 }}</label>
+                    <input type="radio">{{ respuesta.2 }}</input>
+                    <input type="hidden" value="{{ valor.2 }}"></input>
+                    <input type="hidden" value="{{ valor.3 }}"></input>
+                </form>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
+        <div class="">
+            <button class="form-control btn btn-primary btn-block" type="submit" name="Boton"
+                id="Boton">Guardar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

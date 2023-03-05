@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>{{ message }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+{% if preguntas == 0 %}
+<div class="">
+    <h5>aun no hay datos guardados</h5>
+</div>
+{% endif %}
+{% if preguntas != 0 %}
+<div>
+    <table>
+        <thead>
+            <tr>
+                <td>id pregunta</td>
+                <td>texto pregunta</td>
+                <td>estado</td>
+                <td>fecha reg</td>
+                <td>hora reg</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pregunta in preguntas %}
+            <tr>
+                <td>{{ pregunta.0 }}</td>
+                <td>{{ pregunta.1 }}</td>
+                <td>{{ pregunta.2 }}</td>
+                <td>{{ pregunta.3 }}</td>
+                <td>{{ pregunta.4 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {% if respuestas !=0 %}
+    <table>
+        <thead>
+            <tr>
+                <td>id respuesta</td>
+                <td>id pregunta</td>
+                <td>text respuesta</td>
+                <td>fecha reg</td>
+                <td>hora reg</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for respuesta in respuestas %}
+            <tr>
+                <td>{{ respuesta.0 }}</td>
+                <td>{{ respuesta.1 }}</td>
+                <td>{{ respuesta.2 }}</td>
+                <td>{{ respuesta.3 }}</td>
+                <td>{{ respuesta.4 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {% if valores !=0 %}
+    <table>
+        <thead>
+            <tr>
+                <td>id valores</td>
+                <td>id respuestas</td>
+                <td>caracterisita valor</td>
+                <td>valor</td>
+                <td>fecha reg</td>
+                <td>hora reg</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for valor in valores %}
+            <tr>
+                <td>{{ valor.0 }}</td>
+                <td>{{ valor.1 }}</td>
+                <td>{{ valor.2 }}</td>
+                <td>{{ valor.3 }}</td>
+                <td>{{ valor.4 }}</td>
+                <td>{{ valor.5 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+
+<div class="">
+    <a href="/createQuestion" class="btn btn-md btn-success">Crear pregunta</a>
+</div>
+{% endblock %}
